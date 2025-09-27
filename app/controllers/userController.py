@@ -71,3 +71,13 @@ def deleteUser(user_id: int):
             session.close()
             return False
 
+def getUserByUsername(username: str):
+    user = session.query(Users).filter(Users.username == username).first()
+    session.close()
+    return user
+
+def getUserByEmail(email: str):
+    user = session.query(Users).filter(Users.email == email).first()
+    session.close()
+    return user
+

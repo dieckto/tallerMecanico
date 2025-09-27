@@ -13,15 +13,12 @@ class Users(Base):
     role = Column(String(50), nullable=False)  # e.g., 'admin', 'mechanic', 'customer'
 
 
-
-def create_admin_user():
-    cliente = Users(
-        username="admin",
-        email="blablabla@gmail.com",
-        full_name="Admin", 
-        hashed_password="admin",
-        role="admin"
-    )
-    session.add(cliente)    
+def deleteUserById(user_id: int):
+    user = session.query(Users).filter(Users.id == user_id).first()
+    if not user:
+        session.close()
+        return False
+    session.delete(user)
     session.commit()
     session.close()
+    return True
