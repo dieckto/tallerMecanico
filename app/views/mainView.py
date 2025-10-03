@@ -1,6 +1,10 @@
 import tkinter as tk
+from tkinter import messagebox
 #NOTA: usar import de modulo puede evitar el error de importacion ciclica
 import app.views.logginView as logginView
+from app.views.viewsAdmin.registerNewAdmin import RegisterNewAdmin
+from app.services.validateServices import validateRange
+from app.services.userServices import getRole
 
 
 class MainView:
@@ -16,6 +20,7 @@ class MainView:
 
         #variable usuario
         self.usuario = usuario
+        self.role = getRole(self.usuario)
         
         # Crear el frame principal
         self.frame_principal = tk.Frame(root, bg="#f0f0f0")
@@ -69,8 +74,9 @@ class MainView:
         opciones = [
             "🏠 Inicio",
             "👤 Perfil",
-            "📊 Dashboard",
-            "⚙️ Configuración",
+            "👤 agregar administrador",
+            "📊 agregar cliente",
+            "⚙️ Reparaciones",
             "📝 Reportes",
             "❓ Ayuda",
             "🚪 Salir"
@@ -152,12 +158,22 @@ class MainView:
         self.btn_menu.configure(text="☰")
     
     def seleccionar_opcion(self, opcion):
+        
         """Manejar la selección de opciones del menú"""
-
         if opcion == "🚪 Salir":
             for widget in self.root.winfo_children():
                 widget.destroy()
                 logginView.LoginView(self.root)
+            return
+        elif opcion == "👤 agregar administrador":
+            #falta validar si el usuario es admin
+            if validateRange(self.role, "register_admin") == False:
+                for widget in self.root.winfo_children():
+                    widget.destroy()
+                
+                RegisterNewAdmin(self.root, self.usuario)
+            else:
+                messagebox.showerror("Error", "No tienes permisos para acceder a esta sección.")
             return
         contenidos = {
             "🏠 Inicio": "Has seleccionado INICIO\n\nEsta es la página principal de la aplicación.",

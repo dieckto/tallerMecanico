@@ -3,7 +3,7 @@ from tkinter import font
 from app.services.loginService import authenticate
 from app.views.mainView import MainView
 from app.views.registerView import RegisterView
-from app.services.getUserName import getUserName
+from app.services.userServices import getUserName
 
 
 class LoginView:
@@ -37,12 +37,18 @@ class LoginView:
         self.entry_user = tk.Entry(self.frame, font=self.fuente, bd=0,
                                    highlightthickness=1, highlightbackground="#ccc",
                                    relief="flat")
+        self.entry_user.bind(self.insert_placeholder(self.entry_user, "nombre de usuario"))
+        self.entry_user.bind("<FocusIn>", lambda e: self.on_focus_in(self.entry_user, "nombre de usuario"))
+        self.entry_user.bind("<FocusOut>", lambda e: self.on_focus_out(self.entry_user, "nombre de usuario"))
         self.entry_user.pack(pady=10, ipadx=10, ipady=8, fill="x")
 
         # Campo contraseña
         self.entry_pass = tk.Entry(self.frame, font=self.fuente, bd=0,
                                    highlightthickness=1, highlightbackground="#ccc",
                                    show="*", relief="flat")
+        self.insert_placeholder(self.entry_pass, "contraseña")
+        self.entry_pass.bind("<FocusIn>", lambda e: self.on_focus_in(self.entry_pass, "contraseña")) 
+        self.entry_pass.bind("<FocusOut>", lambda e: self.on_focus_out(self.entry_pass, "contraseña"))
         self.entry_pass.pack(pady=10, ipadx=10, ipady=8, fill="x")
 
         # Botón login
@@ -102,3 +108,28 @@ class LoginView:
         for widget in self.root.winfo_children():
             widget.destroy() 
         RegisterView(self.root)
+
+    def on_focus_in(self, entry,placeholder):
+        placeholder = placeholder
+        if entry.get() == placeholder:
+            entry.delete(0, tk.END)   # borra el texto
+            entry.config(fg="black")  # 
+        
+               # Si es el campo de contraseña → activar show="*"
+        if placeholder == "contraseña":
+            entry.config(show="*")
+
+    def on_focus_out(self, entry, placeholder):
+        if entry.get() == "":
+            entry.insert(0, placeholder)
+            entry.config(fg="grey")
+
+        if placeholder == "contraseña":
+            entry.config(show="")
+
+    def insert_placeholder(self, entry, placeholder):
+        entry.insert(0, placeholder)
+        entry.config(fg="grey")
+
+        if placeholder == "contraseña":
+            entry.config(show="")
