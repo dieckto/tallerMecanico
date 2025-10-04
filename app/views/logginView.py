@@ -72,7 +72,7 @@ class LoginView:
             # Limpiar login y abrir MainView
             for widget in self.root.winfo_children():
                 widget.destroy()
-            MainView(self.root, userName)
+            MainView(self.root, userName, user)
         else:
             self.errorLogin()
              #
@@ -95,6 +95,7 @@ class LoginView:
                                  bg="#f9f9f9", font=("Segoe UI", 10, "underline"),
                                  cursor="hand2")
         self.lbl_link.pack(pady=(10, 0))
+        self.lbl_link.bind("<Button-1>", lambda e: self.crear_cuenta())
 
          # Botón login
         self.btn_Errorlogin = tk.Button(self.frame, text="aceptar", font=self.fuente,

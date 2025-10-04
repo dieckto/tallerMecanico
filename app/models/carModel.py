@@ -1,5 +1,10 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
+from app.models.clientModel import Clients
+from sqlalchemy.orm import relationship
 from app.config.database import Base, session
+import app.models.clientModel
+
+
 
 class Car(Base):
     __tablename__ = "cars"
@@ -8,4 +13,5 @@ class Car(Base):
     model = Column(String(50), nullable=False)
     year = Column(Integer, nullable=False)
     matricula = Column(String(100), unique=True, index=True, nullable=False)
-    ownerid = Column(Integer, nullable=False)  # Foreign key to Users table
+    ownerid = Column(Integer, ForeignKey("clients.id"), nullable=False) 
+    owner = relationship("Clients", back_populates="cars")

@@ -8,7 +8,7 @@ from app.services.userServices import getRole
 
 
 class MainView:
-    def __init__(self, root, usuario):
+    def __init__(self, root, userName, user):
         self.root = root
         self.root.title("Main aplication")
         self.root.geometry("800x600")
@@ -19,8 +19,9 @@ class MainView:
         self.ancho_menu = 250
 
         #variable usuario
-        self.usuario = usuario
-        self.role = getRole(self.usuario)
+        self.user = user
+        self.userName = userName
+        self.role = getRole(user)
         
         # Crear el frame principal
         self.frame_principal = tk.Frame(root, bg="#f0f0f0")
@@ -74,11 +75,12 @@ class MainView:
         opciones = [
             "🏠 Inicio",
             "👤 Perfil",
-            "👤 agregar administrador",
-            "📊 agregar cliente",
+            "➕👨‍💼 agregar administrador",
+            "➕👤 agregar cliente",
+            "🔍👥 buscar clientes",
+            "👤🔍 buscar usuario",
             "⚙️ Reparaciones",
             "📝 Reportes",
-            "❓ Ayuda",
             "🚪 Salir"
         ]
         
@@ -106,7 +108,7 @@ class MainView:
 
         titulo_principal = tk.Label(
             self.contenido_principal,
-            text=f"¡ bienvenido {self.usuario}!",
+            text=f"¡ bienvenido {self.userName}!",
             font=("Arial", 24, "bold"),
             bg="#ecf0f1",
             fg="#2c3e50"
@@ -167,12 +169,13 @@ class MainView:
             return
         elif opcion == "👤 agregar administrador":
             #falta validar si el usuario es admin
-            if validateRange(self.role, "register_admin") == False:
+            if validateRange(self.role, "register_admin"):
                 for widget in self.root.winfo_children():
                     widget.destroy()
                 
-                RegisterNewAdmin(self.root, self.usuario)
+                RegisterNewAdmin(self.root, self.userName, self.user)
             else:
+                print(self.role)
                 messagebox.showerror("Error", "No tienes permisos para acceder a esta sección.")
             return
         contenidos = {

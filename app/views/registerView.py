@@ -85,7 +85,7 @@ class RegisterView:
                 widget.destroy()
             self.go_to_login()
         else:
-            messagebox.showerror(message)
+            messagebox.showerror("Error", message)
     
     def go_to_login(self):
         for widget in self.root.winfo_children():

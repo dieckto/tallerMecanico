@@ -6,9 +6,9 @@ def getUserName(username: str):
         return user.full_name
     return None
 
-def getRole(id):
+def getRole(username: str):
     
-    user = getUserById(id)
+    user = getUserByUsername(username)
 
     if user: 
         return user.role

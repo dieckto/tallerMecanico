@@ -2,6 +2,8 @@
 from app.config.database import Base, engine
 #se necesita importar el modelo para que se cree la tabla
 from app.models.Users import Users
+from app.models.clientModel import Clients
+from app.models.carModel import Car
 # Crear tablas en la BD si no existen
 Base.metadata.create_all(engine)
 

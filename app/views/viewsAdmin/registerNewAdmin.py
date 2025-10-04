@@ -6,14 +6,15 @@ from app.services.registerServices import register_user
 import app.views.mainView as MainView
 
 class RegisterNewAdmin:
-    def __init__(self, root, usuario):
+    def __init__(self, root, userName, user):
         self.root = root
-        self.root.title("Registro de Usuario")
+        self.root.title("Registro de administrador")
         self.root.geometry("700x700")  # tamaño de la ventana
         self.root.config(bg="#f9f9f9")
         self.root.resizable(False, False)
 
-        self.usuario = usuario
+        self.user = user
+        self.userName= userName
 
         self.fuente_titulo = font.Font(family="Segoe UI", size=18, weight="bold")
         self.fuente_normal = font.Font(family="Segoe UI", size=12)
@@ -87,7 +88,7 @@ class RegisterNewAdmin:
         for widget in self.root.winfo_children():
             widget.destroy() 
         from app.views.logginView import LoginView
-        MainView.MainView(self.root, self.usuario)
+        MainView.MainView(self.root, self.userName, self.user)
 
         
 if __name__ == "__main__":
