@@ -9,7 +9,7 @@ class Clients(Base):
     phone = Column(String(20), nullable=False)
     email = Column(String(100), unique=True, index=True, nullable=False)
     address = Column(String(255), nullable=True)
+    assesor_id = Column(Integer, ForeignKey("users.id"),nullable=True)  # ID del asesor asignado
+    assessor = relationship("Users", back_populates= "clients")  # Relación con el modelo Users
     cars = relationship("Car", back_populates="owner", cascade="all, delete-orphan")
-    assesorid = Column(Integer, ForeignKey("users.id"),nullable=True)  # ID del asesor asignado
-    assesor = relationship("Users", back_populates= "clients")  # Relación con el modelo Users
-    fixes = relationship("Fix", back_populates="client", cascade="all, delete-orphan")
+    

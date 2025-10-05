@@ -12,6 +12,6 @@ class Users(Base):
     full_name = Column(String(100), nullable=False)
     hashed_password = Column(String(255), nullable=False)
     role = Column(String(50), nullable=False) 
-    clients = relationship("Clients", back_populates="assesor", cascade="all, delete-orphan")
+    clients = relationship("Clients", back_populates="assessor", cascade="all, delete-orphan")
 
 

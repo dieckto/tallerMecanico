@@ -4,7 +4,9 @@ from app.config.database import Base, engine
 from app.models.Users import Users
 from app.models.clientModel import Clients
 from app.models.carModel import Car
+from app.models.fixModel import Fix
 # Crear tablas en la BD si no existen
+Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
 #librerias para la interfaz grafica
