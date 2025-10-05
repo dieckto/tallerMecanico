@@ -1,8 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from app.models.clientModel import Clients
 from sqlalchemy.orm import relationship
 from app.config.database import Base, session
-import app.models.clientModel
 
 
 

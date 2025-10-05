@@ -167,7 +167,7 @@ class MainView:
                 widget.destroy()
                 logginView.LoginView(self.root)
             return
-        elif opcion == "👤 agregar administrador":
+        elif opcion == "➕👨‍💼 agregar administrador":
             #falta validar si el usuario es admin
             if validateRange(self.role, "register_admin"):
                 for widget in self.root.winfo_children():

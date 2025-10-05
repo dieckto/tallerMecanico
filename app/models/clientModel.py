@@ -12,3 +12,4 @@ class Clients(Base):
     cars = relationship("Car", back_populates="owner", cascade="all, delete-orphan")
     assesorid = Column(Integer, ForeignKey("users.id"),nullable=True)  # ID del asesor asignado
     assesor = relationship("Users", back_populates= "clients")  # Relación con el modelo Users
+    fixes = relationship("Fix", back_populates="client", cascade="all, delete-orphan")
