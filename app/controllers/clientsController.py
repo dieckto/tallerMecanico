@@ -52,3 +52,23 @@ def updateClient(client_id: int, name: str = None, phone: str = None, email: str
         return None
     finally:
         session.close()
+
+def getClientsByName(name: str):
+    clients = session.query(Clients).filter(Clients.name.ilike(f"%{name}%")).all()
+    session.close()
+    return clients
+
+def deleteClient(client_id: int):
+    client = session.query(Clients).filter(Clients.id == client_id).first()
+    if not client:
+        session.close()
+        return None
+    try:
+        session.delete(client)
+        session.commit()
+        return True
+    except Exception:
+        session.rollback()
+        return None
+    finally:
+        session.close()

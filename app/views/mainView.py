@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 #NOTA: usar import de modulo puede evitar el error de importacion ciclica
 import app.views.logginView as logginView
+import app.views.searchClientView as searchClientView
 
 from app.views.viewsAdmin.registerNewAdmin import RegisterNewAdmin
 from app.services.validateUserServices import validateRange
@@ -184,7 +185,16 @@ class MainView:
             if validateRange(self.role, "register_client"):
                 for widget in self.root.winfo_children():
                     widget.destroy()
-                RegisterNewClient(self.root, self.userName, self.user   )
+                RegisterNewClient(self.root, self.userName, self.user)
+        elif opcion == "🔍👥 buscar clientes":
+            if validateRange(self.role, "search_client"):
+                for widget in self.root.winfo_children():
+                    widget.destroy()
+                searchClientView.searchClientView(self.root, self.userName, self.user)
+            else:
+                print(self.role)
+                messagebox.showerror("Error", "No tienes permisos para acceder a esta sección.")
+            return
         contenidos = {
             "🏠 Inicio": "Has seleccionado INICIO\n\nEsta es la página principal de la aplicación.",
             "👤 Perfil": "Has seleccionado PERFIL\n\nAquí puedes ver y editar tu información personal.",

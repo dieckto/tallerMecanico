@@ -10,9 +10,9 @@ def validateClientFields(name: str, phone: str, email: str, address: str = None,
         return False, "El número de teléfono es demasiado corto."
     return True, ""
 
-def registerClient(name: str, phone: str, email: str, address: str = None, assesor_id: int = None):
+def registerClient(name: str, phone: str, email: str, address: str = None, assesor_id : int = None):
     is_valid, message = validateClientFields(name, phone, email, address, assesor_id)
-    if not is_valid:
+    if not is_valid: 
         return is_valid, message
     else:
         if createClient(name, phone, email, address, assesor_id) == None:

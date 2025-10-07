@@ -20,3 +20,9 @@ def getUserId(username: str):
     if user:
         return user.id
     return None
+
+def getUserNameById(userId: int):
+    user = getUserById(userId)
+    if user:
+        return user.username
+    return None
