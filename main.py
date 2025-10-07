@@ -1,12 +1,12 @@
 #crear todas las tablas que no existan en la base de datos 
 from app.config.database import Base, engine
-#se necesita importar el modelo para que se cree la tabla
+#modelos para la creacion de tablas
 from app.models.Users import Users
 from app.models.clientModel import Clients
 from app.models.carModel import Car
 from app.models.fixModel import Fix
+
 # Crear tablas en la BD si no existen
-Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
 #librerias para la interfaz grafica

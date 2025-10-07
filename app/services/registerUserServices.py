@@ -22,5 +22,7 @@ def register_user(username, email, full_name, password, role):
     if existing_email:
         return False, "El correo electrónico ya está registrado."
 
-    createUser(username, email, full_name, password, role)
-    return True, "Usuario registrado exitosamente."
+    if createUser(username, email, full_name, password, role) == None:
+        return False, "Error al registrar el usuario. Inténtalo de nuevo."
+    else:
+        return True, "Usuario registrado exitosamente."

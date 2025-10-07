@@ -14,3 +14,9 @@ def getRole(username: str):
         return user.role
     else: 
         return None
+    
+def getUserId(username: str):
+    user = getUserByUsername(username)
+    if user:
+        return user.id
+    return None

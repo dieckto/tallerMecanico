@@ -6,6 +6,8 @@ def validateRange(role, action):
     elif role == "secretario":
         if action == "register_admin":
             return False
+        elif action == "register_client":
+            return True
         elif action == "register_car":
             return True
         elif action == "puede ver pestaña de clientes y vehiculo, no puede eliminar ni editar ":

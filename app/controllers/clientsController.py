@@ -2,12 +2,13 @@ from app.models.clientModel import Clients
 from app.config.database import session
 from sqlalchemy.exc import IntegrityError
 
-def createClient(name: str, phone: str, email: str, address: str = None):
+def createClient(name: str, phone: str, email: str, address: str = None, assesor_id: int = None):
     new_client = Clients(
         name=name,
         phone=phone,
         email=email,
-        address=address
+        address=address,
+        assesor_id=assesor_id
     )
     try:
         session.add(new_client)

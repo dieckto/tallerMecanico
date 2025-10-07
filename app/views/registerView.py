@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import font
 from tkinter import messagebox
-from app.services.registerServices import register_user
+from app.services.registerUserServices import register_user
 
 class RegisterView:
     def __init__(self, root):

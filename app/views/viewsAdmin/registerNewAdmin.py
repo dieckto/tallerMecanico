@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import font
 from tkinter import messagebox
-from app.services.registerServices import register_user
+from app.services.registerUserServices import register_user
 import app.views.mainView as MainView
 
 class RegisterNewAdmin:
@@ -87,7 +87,6 @@ class RegisterNewAdmin:
     def go_to_Main_View(self):
         for widget in self.root.winfo_children():
             widget.destroy() 
-        from app.views.logginView import LoginView
         MainView.MainView(self.root, self.userName, self.user)
 
         
